@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmarking</title>
+    <style>
+        /* Style for the side navigation bar */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        /* Style for the navigation links */
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* Style for the navigation links on hover */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Style for the close button */
+        .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Style for the welcome content */
+        .welcome-content {
+            margin-left: 0; /* Adjusted from 20% */
+            padding: 50px;
+            height: 100px;
+            transition: margin-left 0.7s; /* Added transition */
+        }
+
+        /* Style for the open sidebar button */
+        .openbtn {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+            transition: left 0.5s; /* Added transition */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Open sidebar button -->
+<span class="openbtn" onclick="toggleNav()">&#9776;</span>
+
+<!-- Side navigation bar -->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">&times;</a>
+    <a href="homepage.html">Home</a>
+    <a href="benchmark.html">Benchmarking</a>
+    <a href="graph_plotting.html">Graph Plotting</a>
+    <a href="distance.html">Distance</a>
+</div>
+
+<!-- Welcome content -->
+<div class="welcome-content">
+    <h1>Benchmarking</h1>
+
+    <!-- Benchmark form -->
+    <label for="algorithm">Algorithm:</label>
+        <select name="algorithm" id="algorithm" onchange="showHideFields()" >
+            <option value="default">--</option> <!-- Default option -->
+            <option value="mtz">MTZ (Miller-Tucker-Zemlin)</option>
+            <option value="nearest_neighbour">Nearest Neighbour</option>
+            <option value="nearest_neighbour_opt">Nearest Neighbour Optimization</option>
+            <option value="two_opt">Two Opt</option>
+            <option value="lns">Large Neighbourhood Search</option>
+            <option value="lns_convergence">Large Neighbourhood Search Convergence</option>
+        </select>
+        <br>
+        <!-- Fields for MTZ algorithm -->
+        <div id="mtzFields" style="display:none;">
+            <label for="timeLimit">Time Limit (seconds):</label>
+            <input type="number" name="timeLimit" id="timeLimit" min="1" value="300"><br>
+            <label for="mipGap">MIP Gap:</label>
+            <input type="number" name="mipGap" id="mipGap" min="0" max="1" step="0.01" value="0.01"><br>
+            <label for="printSolverLog">Print Solver Log:</label>
+            <select name="printSolverLog" id="printSolverLog">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+        <br>
+        <button onclick="runBenchmark()">Run Benchmark</button>
+    </form>
+</div>
+
+<!-- JavaScript to open and close the sidebar -->
+<script src="benchmark.js"></script>
+
+<script>
+    function toggleNav() {
+        var sidebar = document.getElementById("mySidenav");
+        var content = document.getElementsByClassName("welcome-content")[0];
+        var openbtn = document.getElementsByClassName("openbtn")[0];
+
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            content.style.marginLeft = "0";
+            openbtn.style.left = "15px";
+        } 
+        else {
+            sidebar.style.width = "250px";
+            content.style.marginLeft = "250px";
+            openbtn.style.left = "265px";
+        }
+    }
+
+    function showHideFields() {
+        var algorithm = document.getElementById("algorithm").value;
+        var mtzFields = document.getElementById("mtzFields");
+
+        if (algorithm === "mtz") {
+            mtzFields.style.display = "block";
+        } else {
+            mtzFields.style.display = "none";
+        }
+    }
+
+</script>
+
+
+</body>
+</html>
