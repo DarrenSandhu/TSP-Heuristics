@@ -113,6 +113,5 @@ Ensure you are in the `Run_Code` directory while running this command. The GUI w
 - **Real-world Applications**: Extend the algorithms to tackle real-world logistic and routing problems.
 
 ## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) for more details.
 
